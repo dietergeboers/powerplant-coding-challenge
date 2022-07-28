@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
-      "projectName": "EngieChallange",
-      "projectPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
+      "projectUniqueName": "C:\\Users\\DGEBOERS\\TT\\temp\\EngieChallenge\\EngieChallange\\EngieChallenge.csproj",
+      "projectName": "EngieChallenge",
+      "projectPath": "C:\\Users\\DGEBOERS\\TT\\temp\\EngieChallenge\\EngieChallange\\EngieChallenge.csproj",
       "packagesPath": "C:\\Users\\DGEBOERS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\obj\\",
+      "outputPath": "C:\\Users\\DGEBOERS\\TT\\temp\\EngieChallenge\\EngieChallange\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DGEBOERS\\AppData\\Roaming\\NuGet\\NuGet.Config",
