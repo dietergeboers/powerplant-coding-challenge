@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallange.csproj": {}
+    "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallange.csproj": {
+    "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
+        "projectUniqueName": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
         "projectName": "EngieChallange",
-        "projectPath": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
+        "projectPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\EngieChallange.csproj",
         "packagesPath": "C:\\Users\\DGEBOERS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\obj\\",
+        "outputPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallange\\EngieChallange\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DGEBOERS\\AppData\\Roaming\\NuGet\\NuGet.Config",

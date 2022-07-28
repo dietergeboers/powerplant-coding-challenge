@@ -10,12 +10,12 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 string ProductionPlan([FromBody] EngieInput body)
 {
 
-    EngieChallange input = body.Create();
+    EngieChallenge input = body.Create();
 
     EngieSolver solver = new EngieSolver(input);
     PowerPlantSchedule schedule = solver.solve(-1);
@@ -24,4 +24,4 @@ string ProductionPlan([FromBody] EngieInput body)
 }
 
 app.MapPost("/productionplan", ProductionPlan);
-app.Run("https://localhost:8000");
+app.Run("http://localhost:8888");

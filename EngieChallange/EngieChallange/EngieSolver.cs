@@ -5,8 +5,8 @@ namespace Engie
     
     public class EngieSolver
     {
-        private readonly EngieChallange input;
-        public EngieSolver(EngieChallange input)
+        private readonly EngieChallenge input;
+        public EngieSolver(EngieChallenge input)
         {
            
             this.input = input;
@@ -77,7 +77,7 @@ namespace Engie
             return top.Dequeue();
         }
 
-        private PowerPlantSchedule InitialSchedule(EngieChallange input)
+        private PowerPlantSchedule InitialSchedule(EngieChallenge input)
         {
             PowerPlantSchedule rv = new PowerPlantSchedule(input);
 

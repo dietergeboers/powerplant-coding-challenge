@@ -7,9 +7,9 @@
         public PowerPlantInput[] Powerplants { get; set; }
 
 
-        public EngieChallange Create()
+        public EngieChallenge Create()
         {
-            return new EngieChallange()
+            return new EngieChallenge()
             {
                 CO2Price = Fuels["co2(euro/ton)"],
                 Load = load,

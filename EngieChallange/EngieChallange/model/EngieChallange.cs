@@ -1,6 +1,6 @@
 ﻿namespace Engie.model
 {
-    public class EngieChallange
+    public class EngieChallenge
     {
         public IDictionary<string, float> fuels { get; set; }
         public int Load { get; set; }

@@ -4,15 +4,15 @@ namespace Engie
 {
     public class PowerPlantSchedule
     {
-        private readonly EngieChallange challange;
+        private readonly EngieChallenge challenge;
 
         private double[] power;
         private bool[] eliminated;
-        public PowerPlantSchedule(EngieChallange challange)
+        public PowerPlantSchedule(EngieChallenge challenge)
         {
-            this.challange = challange;
-            power = new double[challange.PowerPlants.Length];
-            eliminated = new bool[challange.PowerPlants.Length];
+            this.challenge = challenge;
+            power = new double[challenge.PowerPlants.Length];
+            eliminated = new bool[challenge.PowerPlants.Length];
             
         }
         private void eliminate(int i)
@@ -23,7 +23,7 @@ namespace Engie
 
         private double pmax(int i)
         {
-            return challange.PowerPlants[i].Pmax;
+            return challenge.PowerPlants[i].Pmax;
         }
 
         private double[] CostsVector()
@@ -31,20 +31,20 @@ namespace Engie
             double[] rv = new double[this.power.Length];
             for (int i = 0; i < this.power.Length; i++)
             {
-                rv[i] = this.challange.PowerPlants[i].CostPerMW();
+                rv[i] = this.challenge.PowerPlants[i].CostPerMW();
             }
             return rv;
         }
 
         public bool SatisifyLoad()
         {
-            for (var i = 0; i < challange.PowerPlants.Length; i++)
+            for (var i = 0; i < challenge.PowerPlants.Length; i++)
             {
                 if (eliminated[i])
                     continue;
 
                 SetMax(i);
-                if (Power() >= challange.Load)
+                if (Power() >= challenge.Load)
                 {
                     Shrink(i);
                     return true;
@@ -60,7 +60,7 @@ namespace Engie
             {
                 if (eliminated[i])
                     continue;
-                TotalPower += challange.PowerPlants[i].Cost(power[i]);
+                TotalPower += challenge.PowerPlants[i].Cost(power[i]);
             }
             return TotalPower;
         }
@@ -73,14 +73,14 @@ namespace Engie
 
         internal void SetMax(int i)
         {
-            power[i] = challange.PowerPlants[i].Pmax;
+            power[i] = challenge.PowerPlants[i].Pmax;
         }
         public override string ToString()
         {
             string rv = $"schedule: \n {Power()} MW\n {Cost()} $\n";
             for (int i = 0; i < power.Length; i++)
             {
-                rv += $" {challange.PowerPlants[i].Name} {power[i]}\n";
+                rv += $" {challenge.PowerPlants[i].Name} {power[i]}\n";
             }
             return rv;
         }
@@ -90,7 +90,7 @@ namespace Engie
             for (int i = 0; i < power.Length; i++)
             {
                 rv += "  {\n";
-                rv += $"    \"Name\": \"{challange.PowerPlants[i].Name}\",\n";
+                rv += $"    \"Name\": \"{challenge.PowerPlants[i].Name}\",\n";
                 rv += $"    \"p\": \"{power[i]}\"\n";
                 rv += "  }" + (i == power.Length - 1 ? "" : ",") + "\n";
 
@@ -100,15 +100,15 @@ namespace Engie
         }
         private double pmin(int i)
         {
-            return challange.PowerPlants[i].Pmin;
+            return challenge.PowerPlants[i].Pmin;
         }
         internal void Shrink(int i)
         {
-            if (i < 0 || challange.PowerPlants[i].isWind())
+            if (i < 0 || challenge.PowerPlants[i].isWind())
             {
                 return;
             }
-            var Extra = Power() - challange.Load;
+            var Extra = Power() - challenge.Load;
             power[i] = Math.Max(pmin(i), power[i] - Extra);
         }
         public List<PowerPlantSchedule> Neighbours()
@@ -129,7 +129,7 @@ namespace Engie
 
         private PowerPlantSchedule Clone() 
         {
-            PowerPlantSchedule rv = new PowerPlantSchedule(challange);
+            PowerPlantSchedule rv = new PowerPlantSchedule(challenge);
             for (int i = 0; i < eliminated.Length; i++)
             {
                 rv.eliminated[i] = eliminated[i];
