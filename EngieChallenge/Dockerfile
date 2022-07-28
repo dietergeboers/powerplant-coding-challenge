@@ -12,6 +12,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 COPY --from=build /app/publish .
 
-EXPOSE 8080
+EXPOSE 8888
 ENTRYPOINT ["dotnet", "EngieChallange.dll"]
 
