@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallenge.csproj": {}
+    "C:\\Users\\DGEBOERS\\temp\\EngieChallenge\\EngieChallenge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallenge.csproj": {
+    "C:\\Users\\DGEBOERS\\temp\\EngieChallenge\\EngieChallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallenge.csproj",
+        "projectUniqueName": "C:\\Users\\DGEBOERS\\temp\\EngieChallenge\\EngieChallenge.csproj",
         "projectName": "EngieChallenge",
-        "projectPath": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\EngieChallenge.csproj",
+        "projectPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallenge\\EngieChallenge.csproj",
         "packagesPath": "C:\\Users\\DGEBOERS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DGEBOERS\\source\\repos\\EngieChallange\\EngieChallange\\obj\\",
+        "outputPath": "C:\\Users\\DGEBOERS\\temp\\EngieChallenge\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DGEBOERS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,14 +43,6 @@
             "DotNetty.Common": {
               "target": "Package",
               "version": "[0.7.2, )"
-            },
-            "Microsoft.AspNet.WebPages": {
-              "target": "Package",
-              "version": "[3.2.9, )"
-            },
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
-              "target": "Package",
-              "version": "[1.15.1, )"
             }
           },
           "imports": [
