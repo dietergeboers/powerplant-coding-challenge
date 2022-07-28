@@ -13,14 +13,7 @@ namespace Engie
             this.challange = challange;
             power = new double[challange.PowerPlants.Length];
             eliminated = new bool[challange.PowerPlants.Length];
-            for (int i = 0; i < challange.PowerPlants.Length; i++)
-            {
-                power[i] = pmin(i);
-                if (challange.PowerPlants[i].isWind())
-                {
-                    SetMax(i);
-                }
-            }
+            
         }
         private void eliminate(int i)
         {
@@ -122,6 +115,7 @@ namespace Engie
         {
             List<PowerPlantSchedule> result = new List<PowerPlantSchedule>();
             for (int i = 0; i < eliminated.Length; i++)
+            {
                 if (!eliminated[i] && power[i] > 0)
                 {
                     PowerPlantSchedule newSchedule = Clone();
@@ -129,6 +123,7 @@ namespace Engie
                     if (newSchedule.SatisifyLoad())
                         result.Add(newSchedule);
                 }
+            }
             return result;
         }
 
@@ -142,83 +137,6 @@ namespace Engie
             }
             return rv;
         }
-        /*        public bool SatisfyLoadSimplex()
-                {
-                    TablauBuilder T = new TablauBuilder();
-                    double[] costs = CostsVector();
-                    T.setGoal(costs, false);
-                    Console.WriteLine("minimize:");
-                    for (int i = 0; i < costs.Length; i++)
-                    {
-                        Console.Write($"p{i}\t");
-                    }
-                    Console.WriteLine();
-                    foreach (var co in costs)
-                        Console.Write(co.ToString("0.00") + "\t");
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    for (int i = 0; i < costs.Length; i++)
-                    {
-                        Console.Write($"1\t");
-                    }
-                    Console.WriteLine($">={challange.Load}");
-                    T.addInequality2(Enumerable.Repeat<double>(1, costs.Length).ToArray(), challange.Load, TablauBuilder.inequality.geq);
-
-
-                    for (int i = 0; i < costs.Length; i++)
-                    {
-                        for (int j = 0; j < costs.Length; j++)
-                        {
-                            if (j == i)
-                            {
-                                Console.Write("1\t");
-                            }
-                            else
-                                Console.Write("\t");
-                        }
-                        if (!eliminated[i] && !challange.PowerPlants[i].isWind())
-                            T.addInequality(i, Pmin(i), TablauBuilder.inequality.geq);
-
-                        Console.WriteLine($">={Pmin(i)}");
-                    }
-                    for (int i = 0; i < costs.Length; i++)
-                    {
-                        for (int j = 0; j < costs.Length; j++)
-                        {
-                            if (j == i)
-                                Console.Write("1\t");
-                            else
-                                Console.Write("\t");
-                        }
-                        if (!eliminated[i] && !challange.PowerPlants[i].isWind())
-                        {
-                            T.addInequality(i, Pmax(i), TablauBuilder.inequality.leq);
-                        }
-                        Console.WriteLine($"<={Pmax(i)}");
-                    }
-                    for (int i = 0; i < costs.Length; i++)
-                    {
-                        if (!eliminated[i] && challange.PowerPlants[i].isWind())
-                        {
-                            T.addInequality(i, Pmax(i), TablauBuilder.inequality.eq);
-                        }
-                    }
-                    //Console.WriteLine(T.Build());
-
-
-                    T.Build().solve();
-                    return true;
-                }
-                
-                public Tablau BuildTableau()
-                {
-                    var builder = new TablauBuilder();
-
-
-                    return builder.Build();
-                }
-
-
-         */
+        
     }
 }

@@ -2,29 +2,42 @@
 
 namespace Engie
 {
+    public class I
+    {
+        public readonly int i;
+
+        public I(int i)
+        {
+            this.i = i;
+        }
+
+    }
+    public class CompareI : IComparer<I>
+    {
+        public int Compare(I? x, I? y)
+        {
+            return x.i - y.i;
+        }
+    }
     public class EngieSolver
     {
         private readonly EngieChallange input;
         public EngieSolver(EngieChallange input)
         {
+            Console.WriteLine(input);
             this.input = input;
 
         }
         class PlantCostPerMWComparer : IComparer<PowerPlant>
         {
-            EngieChallange EngieChallange { get; set; }
-            public PlantCostPerMWComparer(EngieChallange input)
-            {
-                EngieChallange = input;
-            }
             public int Compare(PowerPlant? x, PowerPlant? y)
             {
                 var diff = x.CostPerMW() - y.CostPerMW();
                 if (diff == 0)
                     return 0;
-                if (diff < 0)
-                    return -1;
-                return 1;
+                if (diff > 0)
+                    return 1;
+                return -1;
             }
         }
         class PowerPlantScheduleComparer : IComparer<PowerPlantSchedule>
@@ -34,8 +47,8 @@ namespace Engie
                 if (x.Cost() == y.Cost())
                     return 0;
                 if (x.Cost() < y.Cost())
-                    return -1;
-                return 1;
+                    return 1;
+                return -1;
 
             }
         }
@@ -45,7 +58,7 @@ namespace Engie
          */
         public PowerPlantSchedule solve(int maxRuns = -1)
         {
-            Array.Sort(input.PowerPlants, new PlantCostPerMWComparer(input));
+            Array.Sort(input.PowerPlants, new PlantCostPerMWComparer());
             //
             TopX<PowerPlantSchedule> top = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
             Queue<PowerPlantSchedule> queue = new Queue<PowerPlantSchedule>();
@@ -59,6 +72,7 @@ namespace Engie
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)
                 {
                     PowerPlantSchedule schedule = queue.Dequeue();
+                   // Console.WriteLine(schedule);
                     foreach (var neighbour in schedule.Neighbours())
                     {
                         queue.Enqueue(neighbour);
@@ -70,6 +84,12 @@ namespace Engie
             {
                 Console.WriteLine("aborted search: " + ex.Message);
             }
+            
+            while (top.Count > 1)
+            {
+                top.Dequeue();
+            }
+            Console.WriteLine("---best---");
             return top.Dequeue();
         }
 

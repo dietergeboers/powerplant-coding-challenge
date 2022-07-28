@@ -24,13 +24,17 @@ namespace Engie
             {
                 queue.Enqueue(item);
             }
-            if (queue.Count < x || scheduleComparator.Compare(queue.Min(scheduleComparator), item) < 0)
+            if (queue.Count < x || scheduleComparator.Compare(queue.Peek(), item) < 0)
             {
                 if (queue.Count >= x)
-                    queue.Remove(queue.Min(scheduleComparator));
+                {
+                    //queue.Remove(queue.Peek());
+                    queue.Dequeue();
+                }
                 queue.Enqueue(item);
             }
         }
+        
         public T Dequeue() { return queue.Dequeue(); }
     }
 }
