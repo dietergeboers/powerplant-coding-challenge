@@ -2,29 +2,13 @@
 
 namespace Engie
 {
-    public class I
-    {
-        public readonly int i;
-
-        public I(int i)
-        {
-            this.i = i;
-        }
-
-    }
-    public class CompareI : IComparer<I>
-    {
-        public int Compare(I? x, I? y)
-        {
-            return x.i - y.i;
-        }
-    }
+    
     public class EngieSolver
     {
         private readonly EngieChallange input;
         public EngieSolver(EngieChallange input)
         {
-            Console.WriteLine(input);
+           
             this.input = input;
 
         }
@@ -72,7 +56,7 @@ namespace Engie
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)
                 {
                     PowerPlantSchedule schedule = queue.Dequeue();
-                   // Console.WriteLine(schedule);
+
                     foreach (var neighbour in schedule.Neighbours())
                     {
                         queue.Enqueue(neighbour);
@@ -89,7 +73,7 @@ namespace Engie
             {
                 top.Dequeue();
             }
-            Console.WriteLine("---best---");
+            
             return top.Dequeue();
         }
 

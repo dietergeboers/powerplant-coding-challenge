@@ -14,12 +14,6 @@ app.UseHttpsRedirection();
 
 string ProductionPlan([FromBody] EngieInput body)
 {
-    TopX<I> test = new TopX<I>(new CompareI(),2);
-    test.Add(new I(3));
-    test.Add(new I(4));
-    test.Add(new I(1));
-    while (test.Count > 0)
-        Console.WriteLine(test.Dequeue().i);
 
     EngieChallange input = body.Create();
 
