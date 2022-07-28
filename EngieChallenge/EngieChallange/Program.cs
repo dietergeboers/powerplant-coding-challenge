@@ -24,4 +24,4 @@ string ProductionPlan([FromBody] EngieInput body)
 }
 
 app.MapPost("/productionplan", ProductionPlan);
-app.Run("http://localhost:8888");
+app.Run("http://0.0.0.0:8888");
