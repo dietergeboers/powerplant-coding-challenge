@@ -21,7 +21,7 @@ string ProductionPlan([FromBody] EngieInput body)
     PowerPlantSchedule schedule = solver.solve();
     if(schedule == null)
     {
-        return "{\"error\": \"no feasable sollution found\"}";
+        return "{\"error\": \"no feasible solution found\"}";
     }
     return schedule.ToJson();
 

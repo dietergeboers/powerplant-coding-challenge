@@ -16,7 +16,7 @@
             {
                 rv += " " + kvp.Key + ": " + kvp.Value + "\n";
             }
-            rv += "Powerplants:\n";
+            rv += "Power plants:\n";
             foreach (PowerPlant p in PowerPlants)
             {
                 rv += " " + p.ToString();

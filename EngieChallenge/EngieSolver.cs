@@ -60,7 +60,7 @@ namespace Engie
             //start the search with initial schedule
             queue.Enqueue(initialSchedule);
 
-            //breadth first search of all powerplant schedules derivable from the inital schedule
+            //breadth first search of all powerplant schedules derivable from the initial schedule
             //
             try
             {

@@ -5,7 +5,7 @@ namespace Engie
     public class PowerPlantSchedule
     {
         private readonly EngieChallenge challenge;
-        //The powerusage of each plant
+        //The power usage of each plant
         private double[] power;
         //the set of plants that won't be considered 
         private bool[] disabled;
@@ -30,8 +30,8 @@ namespace Engie
         /**
          * Set enabled powerplants to their maximum load and once the total provided power
          * exceeds the requested Load shrink the usage of all plants to match the 
-         * requsted Load exactly. 
-         *  return true if this scheme finds a sollution
+         * requested Load exactly. 
+         *  return true if this scheme finds a solution
          *  return false otherwise.
          */
         public bool SatisfyLoad()
@@ -130,7 +130,7 @@ namespace Engie
          *The set is constructed by taking a clone of the current schedule for
          *each active powerplant and disabling one of the currently activate plants.
          * Then the new schedules are rebuild with SatisfyLoad(),
-         *  each schedule where this happens succesfully is a part of the new set of schedules (the List result)
+         *  each schedule where this happens successfully is a part of the new set of schedules (the List result)
          */
         public List<PowerPlantSchedule> Neighbours()
         {
