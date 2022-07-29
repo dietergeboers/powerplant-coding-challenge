@@ -5,8 +5,9 @@ namespace Engie
     public class PowerPlantSchedule
     {
         private readonly EngieChallenge challenge;
-
+        //The powerusage of each plant
         private double[] power;
+        //the set of plants that won't be considered 
         private bool[] disabled;
         public PowerPlantSchedule(EngieChallenge challenge)
         {
@@ -15,7 +16,7 @@ namespace Engie
             disabled = new bool[challenge.PowerPlants.Length];//false by default
             
         }
-        private void eliminate(int i)
+        private void disable(int i)
         {
             disabled[i] = true;
             power[i] = 0;
@@ -27,7 +28,11 @@ namespace Engie
         }
 
         /**
-         * Try to increase the total power of this schedule to satisfy or go over the demanded Load.
+         * Set enabled powerplants to their maximum load and once the total provided power
+         * exceeds the requested Load shrink the usage of all plants to match the 
+         * requsted Load exactly. 
+         *  return true if this scheme finds a sollution
+         *  return false otherwise.
          */
         public bool SatisifyLoad()
         {
@@ -39,7 +44,7 @@ namespace Engie
                 SetMax(i);
                 if (Power() >= challenge.Load)
                 {
-                    while(i >0)
+                    while(i >=0)
                         Shrink(i--);
                     if (Power() == challenge.Load)
                         return true;
@@ -50,6 +55,9 @@ namespace Engie
             return false;
 
         }
+        /***
+         * Calculates the total cost of using the powerplants in this schedule
+         */
         public double Cost()
         {
             double TotalPower = 0;
@@ -100,6 +108,9 @@ namespace Engie
             return challenge.PowerPlants[i].Pmin;
         }
 
+        /***
+         *shrink the usage of plant i to try and match the requested load as close as possible
+         */
         private void Shrink(int i)
         {
             if (i < 0 || challenge.PowerPlants[i].isWind())
@@ -116,12 +127,12 @@ namespace Engie
         public List<PowerPlantSchedule> Neighbours()
         {
             List<PowerPlantSchedule> result = new List<PowerPlantSchedule>();
-            for (int i = 0; i < disabled.Length; i++)
+            for (int i = 0; i < power.Length; i++)
             {
                 if (!disabled[i] && power[i] > 0)
                 {
                     PowerPlantSchedule newSchedule = Clone();
-                    newSchedule.eliminate(i);
+                    newSchedule.disable(i);
                     if (newSchedule.SatisifyLoad())
                         result.Add(newSchedule);
                 }

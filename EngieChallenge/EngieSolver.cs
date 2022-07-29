@@ -12,6 +12,7 @@ namespace Engie
             this.input = input;
 
         }
+        //compares 2 powerplants and indicates which is cheapsest
         class PlantCostPerMWComparer : IComparer<PowerPlant>
         {
             public int Compare(PowerPlant? x, PowerPlant? y)
@@ -24,7 +25,9 @@ namespace Engie
                 return -1;
             }
         }
-
+        /***
+         * Compare 2 plant schedules based on their cost
+         */
         class PowerPlantScheduleComparer : IComparer<PowerPlantSchedule>
         {
             public int Compare(PowerPlantSchedule? x, PowerPlantSchedule? y)
@@ -44,17 +47,19 @@ namespace Engie
          */
         public PowerPlantSchedule solve(int maxRuns = -1)
         {
+            //cheapest first 
             Array.Sort(input.PowerPlants, new PlantCostPerMWComparer());
-           
-            TopX<PowerPlantSchedule> top = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
+            
+            TopX<PowerPlantSchedule> bestSchedules = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
             
             Queue<PowerPlantSchedule> queue = new Queue<PowerPlantSchedule>();
 
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
 
-            top.Add(initialSchedule);
+            bestSchedules.Add(initialSchedule);
             queue.Enqueue(initialSchedule);
             //breadth first search of all powerplant schedules derivable from the inital schedule
+            //
             try
             {
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)
@@ -63,12 +68,9 @@ namespace Engie
 
                     foreach (var neighbour in schedule.Neighbours())
                     {
-                        //Console.WriteLine(neighbour + $"\npower:{neighbour.Power()}\n");
                         queue.Enqueue(neighbour);
-                        if(neighbour.Power() == input.Load)
-                        {
-                            top.Add(neighbour);
-                        }
+                        bestSchedules.Add(neighbour);
+                        
                     }
                 }
             }
@@ -78,12 +80,12 @@ namespace Engie
                 return null;
             }
             
-            while (top.Count > 1)
+            while (bestSchedules.Count > 1)
             {
-                top.Dequeue();
+                bestSchedules.Dequeue();
             }
             
-            return top.Dequeue();
+            return bestSchedules.Dequeue();
         }
 
         private PowerPlantSchedule InitialSchedule(EngieChallenge input)
