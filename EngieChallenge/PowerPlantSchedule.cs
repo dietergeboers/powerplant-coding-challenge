@@ -69,11 +69,13 @@ namespace Engie
             }
             return TotalPower;
         }
-
+        /***
+         *Total amount of power used in this schedule:
+         *aka sum of all elements in power[] 
+         */
         public double Power()
         {
             return power.Sum();
-
         }
 
         internal void SetMax(int i)
