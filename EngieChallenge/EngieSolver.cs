@@ -52,9 +52,9 @@ namespace Engie
 
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
 
-            top.Add(initialSchedule);
+            //top.Add(initialSchedule);
             queue.Enqueue(initialSchedule);
-
+            Console.WriteLine(initialSchedule);
             //breadth first search of all powerplant schedules derivable from the inital schedule
             try
             {
@@ -64,8 +64,12 @@ namespace Engie
 
                     foreach (var neighbour in schedule.Neighbours())
                     {
+                        //Console.WriteLine(neighbour + $"\npower:{neighbour.Power()}\n");
                         queue.Enqueue(neighbour);
-                        top.Add(neighbour);
+                        if(neighbour.Power() == input.Load)
+                        {
+                            top.Add(neighbour);
+                        }
                     }
                 }
             }

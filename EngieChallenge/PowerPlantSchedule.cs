@@ -27,7 +27,7 @@ namespace Engie
         }
 
         /**
-         * Try to increase the total power of this schedule to satisfy the demanded Load.
+         * Try to increase the total power of this schedule to satisfy or go over the demanded Load.
          */
         public bool SatisifyLoad()
         {
@@ -39,8 +39,12 @@ namespace Engie
                 SetMax(i);
                 if (Power() >= challenge.Load)
                 {
-                    Shrink(i);
-                    return true;
+                    while(i >0)
+                        Shrink(i--);
+                    if (Power() == challenge.Load)
+                        return true;
+                    else
+                        return false;
                 }
             }
             return false;
@@ -95,6 +99,7 @@ namespace Engie
         {
             return challenge.PowerPlants[i].Pmin;
         }
+
         private void Shrink(int i)
         {
             if (i < 0 || challenge.PowerPlants[i].isWind())
@@ -102,7 +107,7 @@ namespace Engie
                 return;
             }
             var Extra = Power() - challenge.Load;
-            power[i] = Math.Max(pmin(i), power[i] - Extra);
+            power[i] = Math.Max(pmin(i), Math.Min(power[i] - Extra,pmax(i)));
         }
         /***
          *All powerplant schedules where one plant that was running in this instance is disabled in the list of neighbours.
