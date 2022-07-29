@@ -16,8 +16,6 @@ string ProductionPlan([FromBody] EngieInput body)
 {
     try
     {
-
-
     EngieChallenge input = body.Create();
     EngieSolver solver = new EngieSolver(input);
     PowerPlantSchedule schedule = solver.solve();

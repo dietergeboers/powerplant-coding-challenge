@@ -95,7 +95,7 @@ namespace Engie
         {
             return challenge.PowerPlants[i].Pmin;
         }
-        internal void Shrink(int i)
+        private void Shrink(int i)
         {
             if (i < 0 || challenge.PowerPlants[i].isWind())
             {
