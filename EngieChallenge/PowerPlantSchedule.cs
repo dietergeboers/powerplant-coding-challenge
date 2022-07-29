@@ -88,7 +88,7 @@ namespace Engie
             {
                 rv += "  {\n";
                 rv += $"    \"Name\": \"{challenge.PowerPlants[i].Name}\",\n";
-                rv += $"    \"p\": \"{power[i]}\"\n";
+                rv += $"    \"p\": \"{Math.Round(power[i],2)}\"\n";
                 rv += "  }" + (i == power.Length - 1 ? "" : ",") + "\n";
 
             }

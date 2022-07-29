@@ -52,9 +52,8 @@ namespace Engie
 
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
 
-            //top.Add(initialSchedule);
+            top.Add(initialSchedule);
             queue.Enqueue(initialSchedule);
-            Console.WriteLine(initialSchedule);
             //breadth first search of all powerplant schedules derivable from the inital schedule
             try
             {
