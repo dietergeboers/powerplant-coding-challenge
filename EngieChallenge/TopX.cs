@@ -2,6 +2,11 @@
 
 namespace Engie
 {
+    /***
+     * A top (or bottom) X of all T added to this collection.
+     * Add/Enqueue to add a T to this collection if it's smaller than the smallest element.
+     * Dequeue to take elements away.
+     */
     public class TopX<T> where T : class
     {
 

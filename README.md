@@ -22,4 +22,4 @@ dotnet 6 enviroment, installing visual studio 2022 should be sufficient to run i
 # Usage:
 
 Use any client (postman is what I used) able to send raw post requests to my 
-application listening on port 8888.
+application listening on the endpoint http://localhost:8888/productionplan .

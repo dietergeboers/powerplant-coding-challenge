@@ -14,9 +14,11 @@ var app = builder.Build();
 
 string ProductionPlan([FromBody] EngieInput body)
 {
+    try
+    {
+
 
     EngieChallenge input = body.Create();
-
     EngieSolver solver = new EngieSolver(input);
     PowerPlantSchedule schedule = solver.solve();
     if(schedule == null)
@@ -24,6 +26,12 @@ string ProductionPlan([FromBody] EngieInput body)
         return "{\"error\": \"no feasable sollution found\"}";
     }
     return schedule.ToJson();
+
+
+    } catch(Exception e)
+    {
+        return e.ToString(); 
+    }
 }
 
 app.MapPost("/productionplan", ProductionPlan);

@@ -24,6 +24,7 @@ namespace Engie
                 return -1;
             }
         }
+
         class PowerPlantScheduleComparer : IComparer<PowerPlantSchedule>
         {
             public int Compare(PowerPlantSchedule? x, PowerPlantSchedule? y)
@@ -37,6 +38,7 @@ namespace Engie
             }
         }
         /**
+         * 
          *maxRuns denotes the amount of powerplant schedules to be considered
          *no argument or any negative value for maxRuns results in running forever ( untill there is no more memory)
          */
@@ -45,12 +47,15 @@ namespace Engie
             Array.Sort(input.PowerPlants, new PlantCostPerMWComparer());
            
             TopX<PowerPlantSchedule> top = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
+            
             Queue<PowerPlantSchedule> queue = new Queue<PowerPlantSchedule>();
 
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
 
             top.Add(initialSchedule);
             queue.Enqueue(initialSchedule);
+
+            //breadth first search of all powerplant schedules derivable from the inital schedule
             try
             {
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)

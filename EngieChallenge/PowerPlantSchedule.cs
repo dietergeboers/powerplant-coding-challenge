@@ -105,7 +105,8 @@ namespace Engie
             power[i] = Math.Max(pmin(i), power[i] - Extra);
         }
         /***
-         *All powerplant schedules where one plant that was running is disabled now.
+         *All powerplant schedules where one plant that was running in this instance is disabled in the list of neighbours.
+         *All returned powerplant schedules satisfy the requested load.
          */
         public List<PowerPlantSchedule> Neighbours()
         {
