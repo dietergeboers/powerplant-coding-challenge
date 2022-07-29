@@ -7,17 +7,17 @@ namespace Engie
         private readonly EngieChallenge challenge;
 
         private double[] power;
-        private bool[] eliminated;
+        private bool[] disabled;
         public PowerPlantSchedule(EngieChallenge challenge)
         {
             this.challenge = challenge;
-            power = new double[challenge.PowerPlants.Length];
-            eliminated = new bool[challenge.PowerPlants.Length];
+            power = new double[challenge.PowerPlants.Length]; //0 by default
+            disabled = new bool[challenge.PowerPlants.Length];//false by default
             
         }
         private void eliminate(int i)
         {
-            eliminated[i] = true;
+            disabled[i] = true;
             power[i] = 0;
         }
 
@@ -26,21 +26,14 @@ namespace Engie
             return challenge.PowerPlants[i].Pmax;
         }
 
-        private double[] CostsVector()
-        {
-            double[] rv = new double[this.power.Length];
-            for (int i = 0; i < this.power.Length; i++)
-            {
-                rv[i] = this.challenge.PowerPlants[i].CostPerMW();
-            }
-            return rv;
-        }
-
+        /**
+         * Try to increase the total power of this schedule to satisfy the demanded Load.
+         */
         public bool SatisifyLoad()
         {
-            for (var i = 0; i < challenge.PowerPlants.Length; i++)
+            for (var i = 0; i < power.Length; i++)
             {
-                if (eliminated[i])
+                if (disabled[i])
                     continue;
 
                 SetMax(i);
@@ -58,7 +51,7 @@ namespace Engie
             double TotalPower = 0;
             for (int i = 0; i < power.Length; i++)
             {
-                if (eliminated[i])
+                if (disabled[i])
                     continue;
                 TotalPower += challenge.PowerPlants[i].Cost(power[i]);
             }
@@ -111,12 +104,15 @@ namespace Engie
             var Extra = Power() - challenge.Load;
             power[i] = Math.Max(pmin(i), power[i] - Extra);
         }
+        /***
+         *All powerplant schedules where one plant that was running is disabled now.
+         */
         public List<PowerPlantSchedule> Neighbours()
         {
             List<PowerPlantSchedule> result = new List<PowerPlantSchedule>();
-            for (int i = 0; i < eliminated.Length; i++)
+            for (int i = 0; i < disabled.Length; i++)
             {
-                if (!eliminated[i] && power[i] > 0)
+                if (!disabled[i] && power[i] > 0)
                 {
                     PowerPlantSchedule newSchedule = Clone();
                     newSchedule.eliminate(i);
@@ -130,9 +126,9 @@ namespace Engie
         private PowerPlantSchedule Clone() 
         {
             PowerPlantSchedule rv = new PowerPlantSchedule(challenge);
-            for (int i = 0; i < eliminated.Length; i++)
+            for (int i = 0; i < disabled.Length; i++)
             {
-                rv.eliminated[i] = eliminated[i];
+                rv.disabled[i] = disabled[i];
                 rv.power[i] = power[i];
             }
             return rv;

@@ -18,8 +18,11 @@ string ProductionPlan([FromBody] EngieInput body)
     EngieChallenge input = body.Create();
 
     EngieSolver solver = new EngieSolver(input);
-    PowerPlantSchedule schedule = solver.solve(-1);
-
+    PowerPlantSchedule schedule = solver.solve();
+    if(schedule == null)
+    {
+        return "{\"error\": \"no feasable sollution found\"}";
+    }
     return schedule.ToJson();
 }
 

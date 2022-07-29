@@ -43,7 +43,7 @@ namespace Engie
         public PowerPlantSchedule solve(int maxRuns = -1)
         {
             Array.Sort(input.PowerPlants, new PlantCostPerMWComparer());
-            //
+           
             TopX<PowerPlantSchedule> top = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
             Queue<PowerPlantSchedule> queue = new Queue<PowerPlantSchedule>();
 
@@ -67,6 +67,7 @@ namespace Engie
             catch (Exception ex)
             {
                 Console.WriteLine("aborted search: " + ex.Message);
+                return null;
             }
             
             while (top.Count > 1)
