@@ -1,7 +1,3 @@
-# Misc: 
-
-This project is created by dieter geboers in Visual studio 2022 using [minimal api's](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0)
-
 # Requirement:
 
 dotnet 6 enviroment, installing visual studio 2022 should be sufficient to run it locally.
@@ -23,3 +19,7 @@ dotnet 6 enviroment, installing visual studio 2022 should be sufficient to run i
 
 Use any client (postman is what I used) able to send raw post requests to my 
 application listening on the endpoint http://localhost:8888/productionplan .
+
+# Misc: 
+
+This project is created by dieter geboers in Visual studio 2022 using [minimal api's](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0)
