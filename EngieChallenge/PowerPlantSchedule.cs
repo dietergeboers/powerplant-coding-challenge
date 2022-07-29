@@ -34,7 +34,7 @@ namespace Engie
          *  return true if this scheme finds a sollution
          *  return false otherwise.
          */
-        public bool SatisifyLoad()
+        public bool SatisfyLoad()
         {
             for (var i = 0; i < power.Length; i++)
             {
@@ -119,12 +119,18 @@ namespace Engie
             {
                 return;
             }
+            //the amount of power this schedule is in excess of the requested load
             var Extra = Power() - challenge.Load;
+            //reduce the power of the i'th plant 
+            // and make sure the result is between pmin(i) and pmax(i)
             power[i] = Math.Max(pmin(i), Math.Min(power[i] - Extra,pmax(i)));
         }
         /***
-         *All powerplant schedules where one plant that was running in this instance is disabled in the list of neighbours.
-         *All returned powerplant schedules satisfy the requested load.
+         *Set of new schedules that satisfy the requested load.
+         *The set is constructed by taking a clone of the current schedule for
+         *each active powerplant and disabling one of the currently activate plants.
+         * Then the new schedules are rebuild with SatisfyLoad(),
+         *  each schedule where this happens succesfully is a part of the new set of schedules (the List result)
          */
         public List<PowerPlantSchedule> Neighbours()
         {
@@ -135,7 +141,7 @@ namespace Engie
                 {
                     PowerPlantSchedule newSchedule = Clone();
                     newSchedule.disable(i);
-                    if (newSchedule.SatisifyLoad())
+                    if (newSchedule.SatisfyLoad())
                         result.Add(newSchedule);
                 }
             }

@@ -49,23 +49,27 @@ namespace Engie
         {
             //cheapest first 
             Array.Sort(input.PowerPlants, new PlantCostPerMWComparer());
-            
+            //collection to keep the best schedules (only 1 is actully needed in my scheme)
             TopX<PowerPlantSchedule> bestSchedules = new TopX<PowerPlantSchedule>(new PowerPlantScheduleComparer(), 10);
-            
+            //the fifo collection representing the schedules being considered
             Queue<PowerPlantSchedule> queue = new Queue<PowerPlantSchedule>();
-
+            //start an initial schedule that satisfies the load
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
-
+            //include the initial schedule in your best schedules
             bestSchedules.Add(initialSchedule);
+            //start the search with initial schedule
             queue.Enqueue(initialSchedule);
+
             //breadth first search of all powerplant schedules derivable from the inital schedule
             //
             try
             {
+                //maxRuns limits the time spend on searching, it is unused right now
+                // once queue.Count == 0 there are no more schedules to be considered.
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)
                 {
                     PowerPlantSchedule schedule = queue.Dequeue();
-
+                    //add all neighbouring schedules, see Neighbours 
                     foreach (var neighbour in schedule.Neighbours())
                     {
                         queue.Enqueue(neighbour);
@@ -76,8 +80,8 @@ namespace Engie
             }
             catch (Exception ex)
             {
+                //expecting out of memory on sufficiently large problems
                 Console.WriteLine("aborted search: " + ex.Message);
-                return null;
             }
             
             while (bestSchedules.Count > 1)
@@ -92,7 +96,7 @@ namespace Engie
         {
             PowerPlantSchedule rv = new PowerPlantSchedule(input);
 
-            if (rv.SatisifyLoad())
+            if (rv.SatisfyLoad())
             {
                 return rv;
             }
