@@ -59,11 +59,12 @@ namespace Engie
             bestSchedules.Add(initialSchedule);
             //start the search with initial schedule
             queue.Enqueue(initialSchedule);
-
+           
             //breadth first search of all powerplant schedules derivable from the initial schedule
             //
             try
             {
+
                 //maxRuns limits the time spend on searching, it is unused right now
                 // once queue.Count == 0 there are no more schedules to be considered.
                 while ((maxRuns < 0 || maxRuns-- > 0) && queue.Count > 0)
@@ -73,7 +74,8 @@ namespace Engie
                     foreach (var neighbour in schedule.Neighbours())
                     {
                         queue.Enqueue(neighbour);
-                        bestSchedules.Add(neighbour);
+                        if(neighbour.Power() == input.Load)
+                            bestSchedules.Add(neighbour);
                         
                     }
                 }

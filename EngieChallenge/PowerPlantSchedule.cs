@@ -46,10 +46,7 @@ namespace Engie
                 {
                     while(i >=0)
                         Shrink(i--);
-                    if (Power() == challenge.Load)
-                        return true;
-                    else
-                        return false;
+                    return true;
                 }
             }
             return false;
@@ -87,7 +84,8 @@ namespace Engie
             string rv = $"schedule: \n {Power()} MW\n {Cost()} $\n";
             for (int i = 0; i < power.Length; i++)
             {
-                rv += $" {challenge.PowerPlants[i].Name} {power[i]}\n";
+                var temp = disabled[i] ? "O:" : "_:";
+                rv += $"{temp} {challenge.PowerPlants[i].Name} {power[i]}\n";
             }
             return rv;
         }
@@ -115,7 +113,7 @@ namespace Engie
          */
         private void Shrink(int i)
         {
-            if (i < 0 || challenge.PowerPlants[i].isWind())
+            if (i < 0 || challenge.PowerPlants[i].isWind() || disabled[i])
             {
                 return;
             }
