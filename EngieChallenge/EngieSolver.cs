@@ -56,12 +56,13 @@ namespace Engie
             //start an initial schedule that satisfies the load
             PowerPlantSchedule initialSchedule = InitialSchedule(input);
             //include the initial schedule in your best schedules
-            bestSchedules.Add(initialSchedule);
+            if(initialSchedule.Power() == input.Load)
+                bestSchedules.Add(initialSchedule);
             //start the search with initial schedule
             queue.Enqueue(initialSchedule);
            
             //breadth first search of all powerplant schedules derivable from the initial schedule
-            //
+            
             try
             {
 
